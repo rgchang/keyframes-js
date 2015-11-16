@@ -1,0 +1,93 @@
+@import url(http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css);
+
+
+@import "variables";
+@import "reset";
+@import "fontawesome";
+
+/* sass goes here */
+
+//-------------- COLORS -----------------
+
+$stop: hsla(0, 100%, 43%, 1);
+$slow: hsla(55, 100%, 43%, 1);
+$go: hsla(100, 100%, 43%, 1);
+$lite-color: hsla(0, 0%, 77%, 1);
+$bdr-color: hsla(0, 0%, 34%, 1);
+$bgc-color: hsla(0, 0%, 96%, 1);
+
+html, body {
+	height: 100%;
+}
+
+main {
+	height: inherit;
+	background-color: $bgc-color;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	div:first-child {
+		$lite-size: 5vw;
+		display: flex;
+		flex-direction: column;
+		background-color: $lite-color;
+		border-radius: $lite-size / 8;
+		padding: $lite-size / 4;
+		margin: $lite-size;
+		border: 2px solid $bdr-color;
+		span {
+			display: block;
+			width: $lite-size;
+			height: $lite-size;
+			background-color: $slow;
+			border-radius: 100%;
+			border: inherit;
+			margin: $lite-size / 4;
+			&:first-child {
+				background-color: $stop;
+				&:hover {
+					background-color: lighten($stop, 20);
+				}
+			}
+			&:last-child {
+				background-color: $go;
+				&:hover {
+					background-color: lighten($go, 20);
+				}
+			}
+			&:hover {
+				cursor: pointer;
+				background-color: lighten($slow, 20);
+			}
+		}
+	}
+	div:last-child {
+		$imgsize: 12vw;
+		width: $imgsize;
+		height: $imgsize * 2.22222;
+		margin: 5vw;
+		background: {
+			//image: url('../img/walk1.gif');
+			position: center;
+			repeat: no-repeat;
+			size: cover;
+		}
+		animation: {
+			name: walk;
+			duration: .75s;
+			iteration-count: infinite;
+			timing-function: linear;
+		}
+	}
+}
+
+@keyframes walk {
+	$perckey: 100 / 9;
+	@for $i from 1 through 9 {
+		$perc: $perckey * $i;
+		#{$perc}% {
+			background-image: url('../img/walk#{$i}.gif');
+		}
+	} 
+}
